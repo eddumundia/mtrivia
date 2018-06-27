@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/Library/WebServer/Documents/mtrivia/app/Http/Controllers/HomeController.php</file>
+            <file>file:/Library/WebServer/Documents/mtrivia/resources/views/questions/view.blade.php</file>
+            <file>file:/Library/WebServer/Documents/mtrivia/resources/views/users/teacher_profile.blade.php</file>
+            <file>file:/Library/WebServer/Documents/mtrivia/app/Http/Controllers/QuestionController.php</file>
+            <file>file:/Library/WebServer/Documents/mtrivia/resources/views/home.blade.php</file>
+            <file>file:/Library/WebServer/Documents/mtrivia/config/app.php</file>
+            <file>file:/Library/WebServer/Documents/mtrivia/.env</file>
+            <file>file:/Library/WebServer/Documents/mtrivia/app/Http/Controllers/UserController.php</file>
+            <file>file:/Library/WebServer/Documents/mtrivia/resources/views/questions/revise.blade.php</file>
+            <file>file:/Library/WebServer/Documents/mtrivia/app/User.php</file>
+        </group>
+    </open-files>
+</project-private>
