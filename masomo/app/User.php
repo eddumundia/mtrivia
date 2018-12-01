@@ -8,10 +8,10 @@ use Carbon\Carbon;
 
 
 
-define('USERNAME', 'sandbox');
-define('APIKEY', 'd1f4320a3f0eba2afc35d16b665ff627252d7cb68ac49fd5d336cc7ccca543d1');
-//define('USERNAME', 'masomotrivia');
-//define('APIKEY', '1572f1b0e2a4b0ef480bf1cfda12e2ced0ff50c824855b42cf2d306a6d05312f');
+//define('USERNAME', 'sandbox');
+//define('APIKEY', 'd1f4320a3f0eba2afc35d16b665ff627252d7cb68ac49fd5d336cc7ccca543d1');
+define('USERNAME', 'masomotrivia');
+define('APIKEY', '1572f1b0e2a4b0ef480bf1cfda12e2ced0ff50c824855b42cf2d306a6d05312f');
 class User extends Authenticatable
 {
     /**
@@ -121,11 +121,24 @@ class User extends Authenticatable
     
     public function checkSubscription($id){
         $check = \App\Subscription::where(['user_id' => $id, 'status' => 1])->first();
-        $dt = Carbon::parse($check->expiry_date);
-        
-        if($dt->diffInDays() >= 31){
-            return 1;
+        if(!empty($check)){
+            $dt = Carbon::parse($check->expiry_date);
+
+            if($dt->diffInDays() <= 31){
+                return 1;
+            }else{
+                return 2;
+            }
         }else{
+            $today = new Carbon();
+            $model = new \App\Subscription();
+            $model->user_id = $id;
+            $model->track_id = 'FREE';
+            $model->amount = 0.00;
+            $model->status = 1;
+            $model->expiry_date = $today->addDays(30);
+            $model->payment_code = 'FREE';
+            $model->save();
             return 2;
         }
     }
@@ -157,5 +170,25 @@ class User extends Authenticatable
             {
               echo "Encountered an error while sending: ".$e->getMessage();
             }
+    }
+    
+    public function getFields(){
+       $fields = array("live"=> "1",
+            "oid"=> date('Y')."".\Auth::user()->code,
+            "inv"=> date('Y')."".\Auth::user()->code,
+            "ttl"=> "200",
+            "tel"=> \Auth::user()->mobile,
+            "eml"=> \Auth::user()->email,
+            "vid"=> "demo",
+            "curr"=> "KES",
+            "p1"=> "",
+            "p2"=> "",
+            "p3"=> "",
+            "p4"=> "200",
+            "cbk"=> $_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"],
+            "cst"=> "1",
+            "crl"=> "2"
+        );
+       return $fields;
     }
 }

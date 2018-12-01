@@ -12,7 +12,7 @@
                                 <div class="col-lg-8">
                                     <div class="col-lg-4">
                                         <div class="avatar-border shadow-4x m-b" style="width:auto;">
-                                              <img class="img-circle" width="128" height="128" src="{{ URL::asset('/images/pp.png')}}">
+                                            <img class="img-circle" width="128" height="128" src="{{ URL::asset('/images/pp.png')}}">
                                         </div>
                                     </div>
                                     <div class="col-lg-8">
@@ -41,7 +41,7 @@
                                       @foreach($data as $child)
                                       <a href="child/{{$child->id}}"><li>{{$child->name}}</li></a>
                                         @endforeach
-                                        <a href="addchild/{{$user->id}}"><li>Add a child</li></a>
+                                        <a href="addchild/{{$user->id}}" class="btn btn-primary"><li>Add a child</li></a>
                                     </ul>
                                 </div>
                             </div>

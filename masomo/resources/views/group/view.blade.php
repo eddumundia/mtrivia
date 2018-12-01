@@ -35,16 +35,16 @@
                                                     <td><?php if(!empty($value->ENG)){?><a href="{{url('/group/revise')}}/{{$value->group_id}}">{{$value->ENG}} %</a><?php } else {?><a href=join/3>ENG</a><?php }?></td>
                                                     <td><?php if(!empty($value->SSR)){?><a href="{{url('/group/revise')}}/{{$value->group_id}}">{{$value->SSR}} %</a><?php } else {?><a href=join/4>SSR</a><?php }?></td>
                                                     <td><?php if(!empty($value->SCIE)){?><a href="{{url('/group/revise')}}/{{$value->group_id}}">{{$value->SCIE}} %</a><?php } else {?><a href=join/5>SCIE</a><?php }?></td>
-                                                    <td><?= $value->group_results;?></td>
+                                                    <td><?= $value->group_results;?>/500</td>
                                                 </tr>
                                                 
                                                 <?php $count ++;?>
                                                 <?php } ?>
                                             </tbody>
                                         </table>
-                                        <?php if($ranks->count() < 1){;?>
-                                        <a href="{{url('/group/join/1')}}">Join group</a>
-                                        <?php };?>
+                                        
+                                        <a href="{{url('/group/join/1')}}" class="btn btn-lg btn-primary">Join group</a>
+                                       
                                     </div>
                                 </div>
                             </div>

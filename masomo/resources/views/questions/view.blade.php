@@ -52,10 +52,10 @@
                 </div>
                 <div class="form-group">
                       <label for="explanation">Explanation</label>
-                      <textarea id="technig" class="form-control" name="explanation" placeholder="Provide some explanation to the question" required></textarea>
+                      <textarea id="technig"  class="wyswyg" class="form-control" name="explanation" placeholder="Provide some explanation to the question"></textarea>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Add explanation</button>
+                    <button type="submit" class="btn btn-primary" onClick="addExplanation()">Add explanation</button>
                    
                 </div>
             </form>
@@ -95,8 +95,8 @@
                 <h5><b>Created by:</b> {{$question->user->name}}</h5>
                 <?php if($question->verified == 1 ){?>
                    <button class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i>Verified</button>
-                <?php }else if(\Auth::user()->role_id == 6){?>
-                   <a href="{{$question->id}}/verify" class="btn btn-default">Verify</a> 
+                <?php }else if(\Auth::user()->id == $question->user_id || \Auth::user()->role_id ==5){?>
+                   <a href="{{url('/question')}}/verify/{{$question->id}}" class="btn btn-success">Verify</a> 
                 <?php }?>
 
                <a href="{{url('/question')}}/{{$question->id}}/edit" class="btn btn-primary">Edit</a>
@@ -114,6 +114,26 @@
 </div>
 @endsection
 
+
+<script>
+     function addExplanation(){
+         var topic = $("#selectTopic").val(),
+              technig = $(".wyswyg").val();
+        if(topic ==""){
+            alert("Please select a topic");
+            event.preventDefault();
+        }
+//        else if(technig ==""){
+//            alert("Please enter some explanation");
+//            event.preventDefault();
+//        }
+     }
+    function addTopic(val){
+        if(val =="add"){
+            $("#addtopic").modal("show");
+        }
+    }
+</script>
 <style>
 .list-group .glyphicon {
     float: right;

@@ -58,10 +58,6 @@ class HomeController extends Controller
         $lava->PieChart('Stocks', $clerks, [
                 'title' => 'Subjects and user counts'
             ]);
-        
-//        $lava2->PieChart('test', $teachers, [
-//                'title' => 'Subjects and user counts'
-//            ]);
 
         return view('home', compact('data', 'lava', 'lava2', 'records'));
     }

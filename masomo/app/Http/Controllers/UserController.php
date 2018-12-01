@@ -130,6 +130,7 @@ class UserController extends Controller
     
     public function newchild(Request $request){
         $parent = \App\User::find(\Auth::user()->id);
+        $model = new \App\User();
         $this->validate(request(), [
             'name' => 'required|max:255',
         ]);
@@ -137,14 +138,16 @@ class UserController extends Controller
          $user = \App\User::create([
             'name' =>$request->input('name'),
             'password' => $parent->password,
-             'email' =>str_random(3).'admin@masomotrivia.com',
-            'mobile' =>'0710306895',
-             'parent_id' => \Auth::user()->id,
+            'email' =>str_random(3).'newchild@masomotrivia.com',
+            'mobile' => $parent->mobile,
+            'parent_id' => \Auth::user()->id,
             'role_id' => 1,
             'section_id' =>$request->input('currentclass'),
             'code' => $this->generateRandom(),
         ]);
-        \Session::flash('success','The child has been added successfully and his code will be sent to '. $parent->mobile);
+        \Session::flash('success','The child has been added successfully and the code will be sent to '. $parent->mobile .' to access Masomo Trivia');
+        $message = "CONGRATULATIONS, Your registration has been successful. Use $user->code code to login for you to play, have fun and learn.";
+        $model->sendSMS($parent->mobile, $message, $user->id);
         return redirect("users/profile");
         
     }
@@ -158,9 +161,5 @@ class UserController extends Controller
         $string = str_shuffle($pin);
 
         return $string;
-    }
-    
-    public function sendsms(){
-        return "hahhaha";
     }
 }

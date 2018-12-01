@@ -24,20 +24,21 @@ class RegistrationController extends Controller
         ]);
         
         $user = User::create([
-            'nameW' =>$request->input('name'),
+            'name' =>$request->input('name'),
             'email' =>$request->input('email'),
             'mobile' =>$request->input('mobile'),
-            'password' => bcrypt($request->input('password')),
-            'role_id' => $request->session()->get('role_id'),
+            'password' => bcrypt($this->generateRandom()),
+            //'role_id' => $request->session()->get('role_id'),
             'section_id' =>$request->input('currentclass'),
+            'role_id' =>$request->input('role_id'),
             'code' => $this->generateRandom(),
         ]);
         
         $model = new User();
-        $message = "Your registration has been a success. Use $user->code code to login for you to play, have fun and learn";
+        $message = "CONGRATULATIONS, Your registration has been successful. Use $user->code code to login for you to play, have fun and learn.";
         $model->sendSMS($user->mobile, $message, $user->id);
        // auth()->login($user);
-        
+        \Session::flash('success',"A code has been sent to $user->mobile, kindly use it to login");
         return redirect("/home");
        // return redirect("storeperson/$user->id");
     }

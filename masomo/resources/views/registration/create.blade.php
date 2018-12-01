@@ -52,49 +52,36 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password">
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
-
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        
                         <div class="form-group{{ $errors->has('current_class') ? ' has-error' : '' }}">
                             <label for="current_class" class="col-md-4 control-label">Select Class</label>
 
                             <div class="col-md-6">
                                 <select id="current_class" name="currentclass" class="form-control">
-                                    <option value="">--Please select--</option>
-                                    <option value="1">Kinder garten</option>
-                                    <option value="2">Class One</option>
-                                    <option value="3">Class Two</option>
-                                    <option value="4">Class Three</option>
-                                    <option value="5">Class Four</option>
-                                    <option value="6">Class Five</option>
-                                    <option value="7">Class Six</option>
-                                    <option value="8">Class Seven</option>
-                                    <option value="7">Class Eight</option>
+                                    <option value="">--Please select--</option>>
+                                    <option value="4">Class Four</option>
+                                    <option value="5">Class Five</option>
+                                    <option value="6">Class Six</option>
+                                    <option value="7">Class Seven</option>
+                                    <option value="8">Class Eight</option>
+                                </select>
+
+                                @if ($errors->has('current_class'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('current_class') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        
+                         <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
+                            <label for="current_class" class="col-md-4 control-label">Roles</label>
+
+                            <div class="col-md-6">
+                                <select id="current_class" name="role" class="form-control">
+                                    <option value="">--Please select--</option>>
+                                    <option value="1">Student</option>
+                                    <option value="2">Parent</option>
+                                    <option value="4">Teacher</option>
                                 </select>
 
                                 @if ($errors->has('current_class'))

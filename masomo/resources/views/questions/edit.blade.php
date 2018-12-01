@@ -36,7 +36,7 @@
                             </div>
                             <div class="form-group">
                                     <label for="question">Edit the question</label>
-                                    <textarea class="form-control" id="technig" name="question" >{{ old('question', $question->question) }}</textarea >
+                                    <textarea class="wyswyg" class="form-control" id="technig" name="question" >{{ old('question', $question->question) }}</textarea >
                             </div>
                             <?php if(\Auth::user()->role_id == 4){?>
                             <div class="form-group">
@@ -50,7 +50,7 @@
                             @foreach($question->answers as $answer)
                             <?php $a++;?>
                             <label for="question">Multiple choice</label>
-                            :<input type="text" class="form-control" id="firstoption" name="options[]" placeholder="First multiple choice" value="{{$answer->answer}}"required> 
+                            :<input type="text" class="form-control" id="firstoption" name="options[{{$answer->id}}]" placeholder="First multiple choice" value="{{$answer->answer}}" required> 
                            
                             @endforeach
                         </div>

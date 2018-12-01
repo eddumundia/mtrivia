@@ -86,4 +86,12 @@ public function anyData()
                 }) 
                 ->make(true);
     }
+    public function anyResults(){
+    $result = \App\Result::with('subject')->where(['user_id' => \Auth::user()->id, 'group_id' => NULL])->select('results.*');
+   
+    
+    return Datatables::of($result)
+                ->make(true);
+    }
+    
 }

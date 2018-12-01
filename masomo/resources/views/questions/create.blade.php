@@ -18,7 +18,7 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="col-md-10">
                     <div class="form-group">
-                       <textarea class="form-control" name="question"  placeholder="Type the Question" ></textarea >
+                        <textarea class="form-control wyswyg" name="question"  placeholder="Type the Question" ></textarea >
                     </div>
             </div>
             <div class="col-lg-10">

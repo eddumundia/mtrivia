@@ -33,17 +33,15 @@
   gtag('config', 'UA-114351766-1');
 </script>
 
-        <title>Masomo Trivia</title>
-         <!-- Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
     
-        <!-- Bootstrap CSS -->
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
         <!-- jQuery -->
 <!--        <script src="//code.jquery.com/jquery.js"></script>-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!--        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
 <!--        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>-->
 
@@ -53,7 +51,7 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-        <style>
+    <style>
         body {
             font-family: 'Lato';
         }
@@ -61,6 +59,7 @@
         .fa-btn {
             margin-right: 6px;
         }
+        
         #footer {
             position: absolute;
             right: 0;
@@ -70,30 +69,29 @@
             background-color: #222733;
             color: #7a87a7;
             text-align: center;
-      }
-      .navbar{
-    box-shadow: 10px 10px 10px grey;
-      }
-.list-group .glyphicon {
-    float: right;
-}
-.answerholder {
-    border: 1px solid #000000;
-    border-radius: 10px;
-    padding-right: 5px;
-    padding: 10px;
-    /* width: 300px !important; */
-    margin: 5px 0px;
-}
-.answerholder:hover {
-    background: #d6f5f5;
-}
-.q/uestion{
-    font-size: 50px;
-}
-
+        }
+        
+        .navbar{
+            box-shadow: 10px 10px 10px grey;
+        }
+        
+        .list-group .glyphicon {
+            float: right;
+        }
+        
+        .answerholder {
+            border: 1px solid #000000;
+            border-radius: 10px;
+            padding-right: 5px;
+            padding: 10px;
+            /* width: 300px !important; */
+            margin: 5px 0px;
+        }
+        
+        .answerholder:hover {
+            background: #d6f5f5;
+        }
     </style>
-        </style>
     </head>
     <body>
         <nav class="navbar navbar-default navbar-static-top">
@@ -110,6 +108,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
+                    <img  height="30px;" src="{{ URL::asset('/images/logo.png')}}" alt="Online questions to revise while preparing for exams">
                     Masomo Trivia
                 </a>
             </div>
@@ -118,11 +117,15 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     @if (Auth::guest())
+                    <li></i><a href="{{ url('/home') }}"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="{{ url('/aboutus') }}"><i class="fa fa-users"></i> About us</a></li>
+                    <li><a href="{{ url('/procedure') }}"><i class="fa fa-building"></i> How it works</a></li>
+                    <li><a href="{{ url('/contactus') }}"><i class="fa fa-phone"></i> Contact us</a></li>
                     @else
-                    <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li><a href="{{ url('/home') }}"><i class="fa fa-home"></i> Home</a></li>
                     @if(Auth::user()->role_id == 3 || Auth::user()->role_id == 4 || Auth::user()->role_id == 5)
                     <li  class="dropdown">
-                        <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Questions<span class="caret"></span></a>
+                        <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-question"></i> Questions<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ url('/question/listsubject/1') }}">Kiswahili</a></li>
                             <li><a href="{{ url('/question/listsubject/3') }}">English</a></li>
@@ -134,7 +137,7 @@
                     @endif
                     @if(Auth::user()->role_id == 3 || Auth::user()->role_id == 4 || Auth::user()->role_id == 5)
                     <li><a href="{{ url('/question/verification') }}">Verifications</a></li>
-                    <li><a href="{{ url('/question/verified') }}">Verified</a></li>
+                    <li><a href="{{ url('/question/verified') }}"><i class="fa fa-check"></i> Verified</a></li>
                     @endif
                     @endif
                 </ul>
@@ -143,8 +146,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/signup') }}">Sign up</a></li>
+                        <li><a href="{{ url('/login') }}"><i class="fa fa-sign-in"></i> Login</a></li>
+                        <li><a href="{{ url('/register') }}"><i class="fa fa-user-plus"></i> Sign up</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -152,6 +155,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/result') }}"><i class="fas fa-award"></i> Performance history</a></li>
                                 <li><a href="{{ url('/users/profile') }}"><i class="fa fa-user"></i> Profile</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
@@ -161,7 +165,9 @@
             </div>
         </div>
     </nav>
-        
+        <div class="preload hide">
+            <img src="{{ URL::asset('/images/banners/2.png')}}">
+        </div>   
 
 @if(Session::has('success'))
     <div class="alert alert-success"><em> {!! session('success') !!}</em></div>
@@ -182,9 +188,9 @@
         <div class="container">
             <div class="pull-left">© <?= date("Y");?> Masomo trivia. All Rights Reserved.</div>
             <div class="pull-right">
-                <a href="">Terms</a>   <a href="">Privacy</a>
+                Follow us
                 <a href="https://www.facebook.com/masomotrivia" target="_blank" class="btn btn-icon btn-rounded btn-primary"><i class="fa fa-facebook"></i></a>
-                <a href="https://twitter.com/m_trivia" target="_blank" class="btn btn-icon btn-rounded btn-info"><i class="fa fa-twitter"></i></a>
+                <a href="https://twitter.com/eddumundia" target="_blank" class="btn btn-icon btn-rounded btn-info"><i class="fa fa-twitter"></i></a>
                 <a href="" target="_blank" class="btn btn-icon btn-rounded btn-danger hide"><i class="fa fa-google"></i></a>
             </div>
         </div>
@@ -192,12 +198,9 @@
     </body>
 </html>
 
+
 <script>
-    function addTopic(val){
-        if(val =="add"){
-            $("#addtopic").modal("show");
-        }
-    }
+    
     
   function changeClass(id){
         var name = $(".teachername").text();
@@ -213,7 +216,7 @@
         
  var editor_config = {
       path_absolute : "{{ URL::to('/') }}",
-      selector : "textarea",
+      selector : ".wyswyg",
       plugins: [
         "advlist autolink lists link image charmap print preview hr anchor pagebreak",
         "searchreplace wordcount visualblocks visualchars code fullscreen",
@@ -252,7 +255,6 @@
     #footer {
     bottom: 0px;
     color: #707070;
-    height: 3em;
     left: 0;
     position: fixed;
     font-size: small;

@@ -18,14 +18,14 @@
                         <ol type="A">
                             <?php foreach ($question->answers as $value) {?>
                                 <?php if(\Auth::user()->role_id == 4 || \Auth::user()->role_id == 5){?>
-                                <a href="{{ url('/question/') }}/{{$question->id}}/correct/{{$value->id}}"> <li class="<?= ($value->correct == 1)?'correct bg-success':''?>"><?= $value->answer;?> <?= ($value->correct == 1)?"<i class='fa fa-check' aria-hidden='true'></i>":"";?></li></a>
+                                 <li class="<?= ($value->correct == 1)?'correct bg-success':''?>"><?= $value->answer;?> <?= ($value->correct == 1)?"<i class='fa fa-check' aria-hidden='true'></i>":"";?></li>
                                 <?php }else{?>
                                   <li class="<?= ($value->correct == 1)?'correct bg-success':''?>"><?= $value->answer;?> <?= ($value->correct == 1)?"<i class='fa fa-check' aria-hidden='true'></i>":"";?></li>
                                 <?php }?>
                             <?php }?>
                         </ol>
                         
-                       <?= ($trivia->correct == 1) ? "CONGRATULATIONS!!" :"";?> You selected: <b><blink>" {{$name}}"</blink></b>  which was the <?= ($trivia->correct == 1) ? "<span class='text-success'><u>correct answer</u></span>" :"<span class='text-success'><u>wrong answer</u></span>";?>
+                       <?= ($trivia->correct == 1) ? "CONGRATULATIONS!!" :"";?> You selected: <b><blink>" {{$name}}"</blink></b>  which is the <?= ($trivia->correct == 1) ? "<span class='text-success'><u>correct answer</u></span>" :"<span class='text-success'><u>wrong answer</u></span>";?>
                        <hr>
                          <p class="lead">
                          <h4><b>Explanation</b></h4>

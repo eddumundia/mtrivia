@@ -27,13 +27,17 @@ class SessionController extends Controller
     
     public function store(){
         $user = User::where(['code'=>request('code')])->first();
-        if($user->count() !=0){
+        if(!empty($user)){
             if($user->checkSubscription($user->id) ==2){
                 auth()->login($user); 
             }else{
                 auth()->login($user); 
+                 \Session::flash('danger','Your subscription has expired, please pay by following the instruction below');
                 return redirect('subscription/create');
             }
+        }else{
+           \Session::flash('danger','Wrong code, check and type again');
+           return redirect('home');
         }
         
         return redirect('home');
@@ -80,7 +84,7 @@ class SessionController extends Controller
             $string = str_shuffle($pin);
             $data->code = $string;
             if($data->save()){
-                $message = "Your new code for login is $string";
+                $message = "Your new code for login is $string.";
                 $sendsms = $data->sendSMS($mobile, $message, $data->id);
                 \Session::flash('success',"A code has been sent to $mobile, kindly use it to login");
                 return redirect("/login");

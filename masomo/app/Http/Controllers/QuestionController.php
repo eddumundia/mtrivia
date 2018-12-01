@@ -88,22 +88,15 @@ public function update(Request $request, $id)
    $question->explanation = $request->input('explanation');
    $question->updated_by = \Auth::user()->id;
    if($question->save()){
-       
-       /*$details = \App\Details::find(['question_id' =>$id]);
-       $details->explanation = $request->input('explanation');
-       $details->topic = $request->input('topic');
-       $details->subject_id = $request->input('subject_id');
-       $details->section_id = $request->input('section_id');
-       $details->save();
-       $options = $request->all()['options'];
-       $answers = $question->answers;
-       
-        
-       foreach ($options as $answer) {
-          $answer = \App\Answer::find(['answer' =>$answer]);
-       }*/
+        $options = $request->input('options');
+        foreach ($options as $key=>$value) {
+          $answer = \App\Answer::find($key);
+          $answer->answer = $value;
+          $answer->save();
+        }
    }
-    return redirect("/question/$id");
+   \Session::flash('success','Edited successful');
+   return redirect("/question/$id");
 }
  /*
   * 
@@ -131,7 +124,7 @@ public function Saveexplanation(Request $request,$id){
 /*
  * 
  */
-public function Verify($id){
+public function VerifyWW($id){
     $question = Question::find($id);
     $question->verified = 1;
     $question->save();
@@ -277,7 +270,8 @@ public function proceed($id, $answer, $fk_random){
     $nextkey = array_search($current, $unserialize) + 1;
     if($nextkey == count($unserialize)) {
         $score = (\App\Trivia::where(['user_id' => \Auth::user()->id, 'random_id' => $fk_random, 'correct' => 1])->count()/50)*100;
-        if($score < 30){
+        
+        if($score <= 30){
             $perfomance = "Fail";
         }else if($score > 30 && $score < 50){
             $perfomance = "Average";
@@ -297,6 +291,7 @@ public function proceed($id, $answer, $fk_random){
             $groupdetails_subject_id = $current_question->subject_id;
             $groupdetails_section_id = $current_question->section_id;
         }
+        
         $result = new \App\Result();
         $result->user_id = \Auth::user()->id;
         $result->random_id = $fk_random;
@@ -358,13 +353,15 @@ function testrelation(){
 }
 
 function verification(){
-    $check = \App\Verified::where(['user_id' => \Auth::user()->id, 'section_id' => \Auth::user()->section_id, 'subject_id'=> \Auth::user()->subject_id])->delete();
+        \App\Verified::where(['user_id' => \Auth::user()->id, 'section_id' => \Auth::user()->section_id, 'subject_id'=> \Auth::user()->subject_id])->delete();
     
-        if(\Auth::user()->role_id == 4){
-            $questions = Question::where(['subject_id' =>\Auth::user()->subject_id, 'section_id' =>\Auth::user()->section_id, 'answered' =>NULL])->get();
+        if(\Auth::user()->role_id == 4 || \Auth::user()->role_id == 5){
+            $questions = Question::where(['subject_id' =>\Auth::user()->subject_id, 'section_id' =>\Auth::user()->section_id, 'answered' =>0])->get();
+            $pending = [];
             foreach ($questions as $value) {
                 $pending[] = $value->id;
             }
+            
             $first = reset($pending);
             $unverifieds = new \App\Verified();
             $unverifieds->user_id = \Auth::user()->id;
@@ -377,12 +374,12 @@ function verification(){
     
         }else if(\Auth::user()->role_id == 3 || \Auth::user()->role_id == 5){
 
-            $dataclerks = Question::where(['subject_id' =>\Auth::user()->subject_id, 'section_id' =>\Auth::user()->section_id])->get();
+            $dataclerks = Question::where(['subject_id' =>\Auth::user()->subject_id, 'section_id' =>\Auth::user()->section_id, 'verified' => 0])->get();
             
             foreach ($dataclerks as $value) {
                 $pending[] = $value->id;
             }
-
+           
             $first = reset($pending);
             $unverifieds = new \App\Verified();
             $unverifieds->user_id = \Auth::user()->id;
@@ -546,5 +543,18 @@ function verified(){
          
          return view("questions.view", compact('question', 'topics'))->with('qid', $first);
 }
+
+        public function verify($id){
+            $question = \App\Question::find($id);
+            $question->verified = 1;// for data clerks
+            $question->verified_by = \Auth::user()->id;
+            $question->date_verified = date('Y-m-d H:i:s');
+            $question->save();
+            
+            $topics  = \App\Topic::where(['section_id' => \Auth::user()->section_id, 'subject_id' =>\Auth::user()->subject_id])->get();
+         
+            
+            return view("questions.view", compact('question', 'topics'))->with('qid', $id);
+        }
     
 }

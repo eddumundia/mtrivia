@@ -31,15 +31,11 @@
                             <div class="col-md-6">
                                 <select id="current_class" name="currentclass" class="form-control">
                                     <option value="">--Please select--</option>
-                                    <option value="1">Kinder garten</option>
-                                    <option value="2">Class One</option>
-                                    <option value="3">Class Two</option>
-                                    <option value="4">Class Three</option>
-                                    <option value="5">Class Four</option>
-                                    <option value="6">Class Five</option>
-                                    <option value="7">Class Six</option>
-                                    <option value="8">Class Seven</option>
-                                    <option value="7">Class Eight</option>
+                                    <option value="4">Class Four</option>
+                                    <option value="5">Class Five</option>
+                                    <option value="6">Class Six</option>
+                                    <option value="7">Class Seven</option>
+                                    <option value="8">Class Eight</option>
                                 </select>
 
                                 @if ($errors->has('current_class'))

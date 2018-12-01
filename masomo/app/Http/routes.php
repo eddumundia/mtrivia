@@ -69,6 +69,11 @@ Route::get('/question/savenext/{id}', [
     'uses' => 'QuestionController@savenext'
 ]);
 
+Route::get('/question/verify/{id}', [
+    'as'   => 'question.verify',
+    'uses' => 'QuestionController@verify'
+]);
+
 Route::get('/question/savenextprev/{id}', [
     'as'   => 'question.savenextprev',
     'uses' => 'QuestionController@savenextprev'
@@ -329,6 +334,42 @@ Route::post('/topic/{id}', [
 ]);
 //Route::post("/topic", "TopicController@store");
 
+Route::get('/result', [
+    'as'   => 'result.index',
+    'uses' => 'ResultController@index'
+]);
+
+Route::get('/site', [
+    'as'   => 'site',
+    'uses' => 'SiteController@home'
+]);
+
+Route::get('/aboutus', [
+    'as'   => 'aboutus',
+    'uses' => 'SiteController@aboutus'
+]);
+
+Route::get('/team', [
+    'as'   => 'team',
+    'uses' => 'SiteController@team'
+]);
+
+Route::get('/procedure', [
+    'as'   => 'procedure',
+    'uses' => 'SiteController@procedure'
+]);
+
+Route::get('/contactus', [
+    'as'   => 'contactus',
+    'uses' => 'SiteController@contactus'
+]);
+Route::post('/mail', [
+    'as'   => 'mail',
+    'uses' => 'SiteController@mail'
+]);
+
+
+
 
 Route::get('/subscription/storage',function(){
     $check = \App\Subscription::where(['user_id' => \Auth::user()->id, 'status' => 1])->first();
@@ -364,6 +405,7 @@ Route::controller('datatables', 'DatatablesController', [
     'anyStudentlist' => 'datatables.studentlist',
     'anyClerklist'  => 'datatables.clerklist',
     'anyTeacherlist'  => 'datatables.teacherlist',
+    'anyResults'  => 'datatables.results',
     'getIndex' => 'datatables',
 ]);
 

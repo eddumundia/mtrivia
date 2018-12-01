@@ -32,6 +32,7 @@
            <button type="submit" id="user-signin" class="btn btn-lg btn-primary btn-block m-t-md m-b-sm">
                <i class="i i-login"></i> LOG IN
            </button> 
+            <div class="text-center"> <a href="{{url('/signup')}}"><span>Sign up</span></a></div>
            <div class="text-center m-t m-b"><a href="{{url('/forgot')}}"><span>Forgot code? Reset Here</span></a></div> 
         </form> 
     </section>

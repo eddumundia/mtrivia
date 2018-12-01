@@ -40,7 +40,6 @@ function joingroup($id){
       
     if(empty($data)){
         $hardest =  \App\Group::where(['subject_id' => $id,'section_id'=> \Auth::user()->section_id])->first();
-        
         if(empty($hardest)){
             $group = new \App\Group();
             $group->section_id = \Auth::user()->section_id;
